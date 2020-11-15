@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+$theme-colors: (
+  "primary": #d90000,
+  "danger": #ff4136,
+  "light": rgb(245, 245, 245),
+  "dark": rgb(16, 16, 16),
+);
+$text-muted: rgba(0, 0, 0, 0.548);
+$font-family-sans-serif: "Roboto", sans-serif;
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+.bg-dark {
+  color: $light;
+}

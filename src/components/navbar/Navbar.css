@@ -1,0 +1,27 @@
+.navbar{
+    background: rgba(255, 255, 255, 0.473) !important;
+    transition: ease-out .3s;
+}
+.btn-close{
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+.navbar a, .navbar button, .navbar-brand{
+    color: black;
+}
+.search-container{
+    min-height: 200px;
+    border-width: .5px !important;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 0.8rem 1rem rgba(31, 31, 31, 0.7) !important;
+}
+
+.search-container .search-input{
+    border-radius: 40px;
+    padding: .6em 2em !important;
+}
+.search-btn {
+    border-radius: 1px !important;
+    padding: .6em 1rem !important;
+}
