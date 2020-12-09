@@ -1,0 +1,59 @@
+.indexCont {
+  z-index: 10;
+}
+.cartTop {
+  z-index: 11;
+}
+
+::placeholder {
+  font-size: 13px !important;
+}
+
+:-ms-input-placeholder {
+  font-size: 13px !important;
+}
+
+::-ms-input-placeholder {
+  font-size: 13px !important;
+}
+
+.indicators li {
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  float: left !important;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  opacity: 0.6;
+  transition: 0.3s !important;
+}
+span.star {
+  color: red;
+  padding-left: 0.2rem;
+  vertical-align: middle;
+}
+.label {
+  text-align: center;
+  font-size: small;
+}
+.indicators li.active,
+.indicators li.done {
+  opacity: 1;
+}
+
+.indicators li.active .circle,
+.indicators li.done .circle {
+  background: var(--primary);
+  color: var(--light);
+}
+.indicators li .circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  color: var(--dark);
+}

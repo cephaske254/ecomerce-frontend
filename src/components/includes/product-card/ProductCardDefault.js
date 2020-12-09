@@ -1,19 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import errorImage from "../../../error.png";
-import Products from "../../products/Products";
 import "./productCard.css";
 import { slugify } from "../../../utils/functions";
+import loadingSvg from "../../../assets/loader.svg";
+import { addToCart } from "../../../redux/actions/cartActions";
+import { connect } from "react-redux";
+import { addToast } from "../../../redux/actions/toastActions";
 
 class ProductCardDefault extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name,
-      image: this.props.image,
-      price: this.props.price,
-      oldPrice: this.props.oldPrice,
-      productId: this.props.productId,
+      errored: false,
+      image: this.props.product.image[0],
     };
   }
   onError = () => {
@@ -24,36 +24,59 @@ class ProductCardDefault extends React.Component {
       });
     }
   };
+
+  handleAddToCart = () => {
+    this.props.addToCart(
+      this.props.product.id,
+      this.props.product.name,
+      this.props.product.price,
+      this.props.product.image[0]
+    );
+  };
+
   render() {
     return (
       <>
-        <div className="col-sm-6 col-md-4 col-lg-3 p-3">
-          <div className="card border-0 shadow-sm h-100">
-            <div className="product-image-cont">
-              <img
-                src={this.state.image}
-                alt=""
-                loading="lazy"
-                className="card-img-top"
-                onError={this.onError}
-              />
-            </div>
-            <div className="card-footer bg-white border-0 d-flex flex-column justify-content-end h-100">
-              <p className="font-weight-bold mb-1">{this.state.name}</p>
-              <div className="d-flex small">
-                <div className="col">{this.state.price}</div>
-                <div className="text-right strike text-muted">
-                  {this.state.oldPrice}
+        <div
+          key={this.props.product.name}
+          className="col-sm-6 col-md-4 col-lg-3 p-3"
+        >
+          <div className="card text-dark text border-0 shadow-sm h-100 text-decoration-none">
+            <Link
+              className="card-top h-100 text-dark text-decoration-none"
+              to={"/p/" + slugify(this.props.product.name)}
+            >
+              <div className="product-image-cont">
+                <img src={loadingSvg} className="loadingImg" alt="" />
+                <img
+                  src={this.state.image}
+                  alt=""
+                  loading="lazy"
+                  className="card-img-top"
+                  onError={this.onError}
+                />
+              </div>
+              <div className="card-footer px-2 bg-white border-0 d-flex flex-column justify-content-end">
+                <p className="font-weight-bold mb-1">
+                  {this.props.product.name}
+                </p>
+                <div className="d-flex small">
+                  <div className="col p-0">{this.props.product.price}</div>
+                  <div className="text-right strike text-muted">
+                    {this.props.product.oldPrice}
+                  </div>
                 </div>
               </div>
-              <div className="d-flex mt-1">
-                <Link
-                  to={"/" + slugify(this.state.name)}
-                  className="btn btn-mono  btn-gradient btn-sm w-100"
-                >
-                  ADD TO CART
-                </Link>
-              </div>
+            </Link>
+            <div className="d-flex mt-1 p-2">
+              <button
+                onClick={() => {
+                  this.handleAddToCart();
+                }}
+                className="btn btn-mono  btn-gradient btn-sm w-100"
+              >
+                ADD TO CART
+              </button>
             </div>
           </div>
         </div>
@@ -63,10 +86,28 @@ class ProductCardDefault extends React.Component {
 }
 ProductCardDefault.defaultProps = {
   name: "Product Name",
-  price: "KES 200",
+  price: "KES 0",
   oldPrice: null,
   image: "",
   productId: null,
 };
-// https://cdn.vox-cdn.com/thumbor/_E2j0isGoUJ9W1AqUYnSvjEjQz0=/0x0:2040x1360/1400x1400/filters:focal(857x517:1183x843):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/55971933/v_8A0A9690.0.jpg
-export default ProductCardDefault;
+
+const matchDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id, name, price, image) => {
+      dispatch(addToCart(id, name, price, image));
+      dispatch(addToast(`${name} added to cart`, "dark", true, false));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.items,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(ProductCardDefault);

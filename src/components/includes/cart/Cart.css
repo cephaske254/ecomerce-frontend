@@ -1,0 +1,18 @@
+.cartCont {
+  width: 100%;
+  max-width: 440px !important;
+  height: 95vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 12;
+  overflow-y: scroll;
+  box-shadow: 0 0rem 1.2rem rgba(0, 0, 0, 0.9) !important;
+}
+
+.cart-item {
+}
+
+.card-title {
+  font-weight: 500 !important;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Xiaomi Mi Note 10 Lite",
+  "description": [
+    "6.47\" inch display",
+    "2.2GHz Octa-core processor",
+    "8GB RAM",
+    "128GB ROM 64MP+8MP+2MP+5MP",
+    "Rear camera 44MP Front camera",
+    "2G,3G,4G/LTE",
+    "5260 mAh Battery"
+  ],
+  "attributes": [
+    {
+      "name": "colors",
+      "items": [
+        {
+          "name": "red",
+          "value": "#f0f0f0",
+          "price": null,
+          "image": null
+        },
+        {
+          "name": "green",
+          "value": "#00ffe5",
+          "price": null,
+          "image": null
+        }
+      ]
+    }
+  ]
+}

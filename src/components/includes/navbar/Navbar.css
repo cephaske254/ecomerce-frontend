@@ -1,6 +1,7 @@
 .navbar{
-    background: rgba(255, 255, 255, 0.473) !important;
+    background: rgba(208, 208, 208, 0.6) !important;
     transition: ease-out .3s;
+    z-index: 10 !important;
 }
 .btn-close{
     position: absolute;
@@ -24,4 +25,14 @@
 .search-btn {
     border-radius: 1px !important;
     padding: .6em 1rem !important;
+}
+
+#cartCount {
+    padding: .1rem .3rem;
+    background: #ffffffc5;
+    color: #000;
+    position: absolute;
+    margin-top: .3rem;
+    margin-left: 1.5rem;
+    cursor: pointer;
 }

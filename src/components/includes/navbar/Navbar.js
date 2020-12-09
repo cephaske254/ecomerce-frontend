@@ -1,12 +1,19 @@
-import React, { Suspense } from "react";
-import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Link } from "react-router-dom";
+import RouteComponent from "../routeComponent";
+import Cart from "../cart/Cart";
 import "./Navbar.css";
-import routes from "../../routes/index";
-import RouteComponent from '../includes/routeComponent'
+
+import * as $ from "jquery";
+import { connect } from "react-redux";
+
+export const navbarRef = React.createRef();
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.navbarRef = React.createRef();
+    this.navbarRef = navbarRef;
+
     this.state = {
       fixed: this.props.fixed,
     };
@@ -15,13 +22,17 @@ class Navbar extends React.Component {
   render() {
     return (
       <>
-        <Router>
+        <div className="progress-container">
+          <div className="progress-bar" id="scrollBar"></div>
+        </div>
+
+        <BrowserRouter>
           <nav
             ref={this.navbarRef}
             className={
               "navbar " +
               (this.state.fixed ? "fixed-top" : "sticky-top") +
-              " navbar-expand-lg"
+              " navbar-expand-lg w-100"
             }
           >
             <Link to="/" className="navbar-brand text-dark">
@@ -59,9 +70,7 @@ class Navbar extends React.Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="#" className="btn link">
-                    <i className="fas fa-shopping-cart"></i>
-                  </Link>
+                  <CartIcon />
                 </li>
                 <li className="nav-item">
                   <button
@@ -77,50 +86,66 @@ class Navbar extends React.Component {
               <SearchBar />
             </div>
           </nav>
-          <Switch>
-            <RouteComponent></RouteComponent>
-          </Switch>
-        </Router>
+
+          <Cart />
+          <RouteComponent></RouteComponent>
+        </BrowserRouter>
       </>
     );
   }
 
   collapseNavbar() {
-    let navbarLinks = document.querySelectorAll(
-      "a.link,a.navbar-brand, .btn.link, .nav-link"
-    );
-    let navbarMobi = document.getElementById("navbarMobi");
-    navbarLinks.forEach((element) => {
-      element.addEventListener("click", function () {
-        if (navbarMobi.classList.contains("show")) {
-          navbarMobi.classList.toggle("show");
-        }
+    try {
+      let navbarLinks = document.querySelectorAll(
+        "a.link,a.navbar-brand, .btn.link, .nav-link"
+      );
+      let navbarMobi = document.getElementById("navbarMobi");
+      navbarLinks.forEach((element) => {
+        element.addEventListener("click", function () {
+          if (navbarMobi.classList.contains("show")) {
+            navbarMobi.classList.toggle("show");
+          }
+        });
       });
-    });
+    } catch {}
   }
+
   componentDidMount() {
     this.collapseNavbar();
 
-    const navbarRef = this.navbarRef.current;
+    let navbarRef = this.navbarRef.current;
     let prevScrollpos = window.pageYOffset;
     let outerHeight = window.outerHeight;
 
-    window.onscroll = () => {
-      let currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        navbarRef.style.top = "0";
-      } else {
-        if (currentScrollPos > outerHeight / 2) {
-          navbarRef.style.top = `-${navbarRef.offsetHeight}px`;
+    window.onload = () => {
+      window.onscroll = () => {
+        let currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+          navbarRef.style.top = "0";
+        } else {
+          if (currentScrollPos > outerHeight / 2) {
+            navbarRef.style.top = `-${navbarRef.offsetHeight}px`;
+          }
         }
-      }
-      prevScrollpos = currentScrollPos;
+        prevScrollpos = currentScrollPos;
+
+        let winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        let height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        try {
+          document.getElementById("scrollBar").style.width = scrolled + "%";
+        } catch {}
+      };
     };
   }
 }
 
 Navbar.defaultProps = {
   fixed: false,
+  cartItems: 0,
 };
 class SearchBar extends React.Component {
   constructor(props) {
@@ -155,5 +180,37 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  let total = 0;
+  try {
+    total = state.cart.items.reduce(
+      (accumulator, current) => accumulator + current.quantity,
+      0
+    );
+  } catch {}
+  return {
+    cartItems: total,
+  };
+};
+
+export const CartIcon = connect(mapStateToProps)((props) => {
+  function showCart() {
+    let cart = $("#cartCont");
+    cart.fadeIn();
+    document.body.style.overflowY = "hidden";
+  }
+
+  return (
+    <div onClick={() => showCart()} className="d-flex">
+      <button className={"btn link " + props.classes}>
+        <i className="fas fa-shopping-cart"></i>
+      </button>
+      <span className="badge bg-light" id="cartCount">
+        {props.cartItems}
+      </span>
+    </div>
+  );
+});
 
 export default Navbar;

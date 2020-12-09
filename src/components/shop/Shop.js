@@ -1,6 +1,7 @@
 import React from "react";
 import "./Shop.css";
 import ProductCarddefault from "../includes/product-card/ProductCardDefault";
+import products from "../home/topProducts.json";
 
 class Shop extends React.Component {
   render() {
@@ -11,10 +12,9 @@ class Shop extends React.Component {
           <div className="row">
             <div className="col container">
               <div className="row">
-                <ProductCarddefault />
-                <ProductCarddefault />
-                <ProductCarddefault />
-                <ProductCarddefault />
+                {products.map((product) => {
+                  return <ProductCarddefault key={product.id} product={product} />;
+                })}
               </div>
             </div>
           </div>

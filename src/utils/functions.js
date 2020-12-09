@@ -1,8 +1,11 @@
-import React from "react";
-
-function slugify(Text) {
+export function slugify(Text) {
   return Text.toLowerCase()
     .replace(/[^\w ]+/g, "")
     .replace(/ +/g, "-");
 }
-export { slugify};
+
+export function toPrice(text) {
+  const cleanedText = text.toLowerCase().replace(/[^0-9.]+/g, "");
+  const price =cleanedText;
+  return parseFloat(price).toFixed(2);
+}

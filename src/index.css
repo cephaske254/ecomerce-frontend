@@ -1,17 +1,52 @@
+html::-webkit-scrollbar {
+  display: none;
+}
+html {
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none;
+}
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+}
+.carousel-indicators {
+  z-index: 2 !important;
+}
+.right-0 {
+  right: 0;
+}
 .btn:hover,
 .btn:focus,
 input:focus {
   box-shadow: none !important;
 }
+.prc-tag {
+  font-weight: 600 !important;
+  color: #f35500d7;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
 .btn-gradient {
   color: white !important;
   background-size: cover;
   background-repeat: no-repeat;
   border: none !important;
-  background: linear-gradient(95deg, #00f3b9 50%, rgba(0, 127, 243, 0.61) 100%);
+  background: linear-gradient(95deg, #00f3b9 50%, #007ff39c 100%);
 }
 .vh-50 {
   height: 50vh;
+}
+.min-vh-80 {
+  min-height: 80vh;
 }
 .section-header {
   margin: 0.9em auto;
@@ -24,4 +59,7 @@ input:focus {
 }
 .strike {
   text-decoration: line-through;
+}
+.list-style-none {
+  list-style: none;
 }

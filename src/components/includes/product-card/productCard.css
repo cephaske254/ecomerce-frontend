@@ -1,0 +1,12 @@
+.loadingImg{
+    z-index: 1;
+    width: 100%;
+    padding: 45%;
+}
+
+.card-img-top {
+    z-index: 1;
+    left: 0;
+    top: 0;
+    position: absolute;
+}

@@ -1,0 +1,129 @@
+[
+  {
+    "id": 1,
+    "name": "Apple Iphone 7 Earphones",
+    "price": "KES 3,500",
+    "oldPrice": "KES 4,000",
+    "image": [
+      "https://www.electronicspareparts.nl/388-large_default/copy-of-samsung-ys-headset-ehs61asfwe-gh59-11849a-35-mm-jack-earphone-for-android-phones-and-all-other-brands-of-devices.jpg",
+      "https://cdn.shopify.com/s/files/1/0263/5333/6380/products/image_764875d0-f9ae-4921-ad5f-64f6940cf703_849x.jpg?v=1593465908",
+      "https://phoneboxgadgets.com/wp-content/uploads/2019/05/s-l500-3.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 2,
+    "name": "Galaxy S20, S20 Plus",
+    "price": "KES 102,000",
+    "oldPrice": "KES 105,000",
+    "image": [
+      "https://images.samsung.com/sg/smartphones/galaxy-s20/buy/1-13-hubble-y2-cosmic-gray-gallery-mobile-img.jpg",
+      "https://www.mytrendyphone.eu/images/Samsung-Galaxy-S20-Duos-128GB-Cosmic-Grey-8806090322334-09032020-01-p.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 3,
+    "name": "Oppo F11 Pro 6GB/128GB",
+    "price": "KES 40,500",
+    "image": [
+      "https://ecitymobileshop.com/wp-content/uploads/2019/05/Oppo-F11-Pro.jpg",
+      "https://www.phoneplacekenya.com/wp-content/uploads/2019/04/Oppo-F11-Pro-d.png"
+    ],
+    "description": []
+  },
+  {
+    "id": 12,
+    "name": "Xiaomi Mi Note 10 Lite 6GB/128GB",
+    "price": "KES 53,500",
+    "image": [
+      "https://thetomorrowtechnology.co.ke/wp-content/uploads/2020/06/xiaomi_mi_note_10_lite_004_blanco_ad_l.jpg",
+      "https://i01.appmifile.com/webfile/globalimg/zhouyuxin/F4L-purple-800.png"
+    ],
+    "description": []
+  },
+  {
+    "id": 4,
+    "name": "Philips Hue Light Strip",
+    "price": "KES 2,500",
+    "image": [
+      "https://www.assets.signify.com/is/image/PhilipsLighting/e5894e628723498da4f3ac2500a4259d",
+      "https://multimedia.bbycastatic.ca/multimedia/products/500x500/103/10395/10395304.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 5,
+    "name": "Iphone XS Max 64GB",
+    "price": "KES 75,000",
+    "oldPrice": "KES 87,000",
+    "image": [
+      "https://static.compareindia.news18.com/compareindia/gallery/images/2018/oct/xsmax_1_161026464764.jpg",
+      "https://www.einfo.co.nz/media/catalog/product/cache/0ee050c3ffc3555709b9bb6062f4d7e9/i/g/ig.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 6,
+    "name": "Apple Iphone lightning Cable",
+    "price": "KES 1,999",
+    "image": [
+      "https://felixredsmart.com/wp-content/uploads/2020/03/apple-lighting-cable.jpg",
+      "https://www.mobiletech.ie/user/products/large/Accessories/Cables/Lightning%20Cable/Apple/mobiletech-apple-lightning-to-usb-cable-1.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 7,
+    "name": "Dji Osmo4 Stabilizer",
+    "price": "KES 20,000",
+    "oldPrice": "KES 25,000",
+    "image": [
+      "https://cdn.vox-cdn.com/thumbor/kuPaE02GgLKMzWo6DqG7O8sXxFI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/21818474/Untitled_2.jpg",
+      "https://5.imimg.com/data5/SELLER/Default/2020/8/EA/KU/XC/16051782/dji-osmo-mobile-2-handheld-smartphone-gimbal-500x500.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 8,
+    "name": "Xiaomi Wear 3100",
+    "price": "KES 12,000",
+    "image": [
+      "https://gloimg.gbtcdn.com/images/pdm-product-pic/Electronic/2019/11/12/source-img/20191112100832_56551.jpg_500x500.jpg",
+      "https://gloimg.gbtcdn.com/images/pdm-product-pic/Electronic/2019/11/26/source-img/20191126094538_5ddc83c26adba.jpg_500x500.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 9,
+    "name": "Redragon RGB Keyboard & Mouse",
+    "price": "KES 4,500",
+    "image": [
+      "https://i5.walmartimages.com/asr/9ecdffb2-3280-4e2b-b499-8b5512dacdd7_1.b74e7961fc2cde8140300cbd79fb198d.jpeg",
+      "https://images-na.ssl-images-amazon.com/images/I/71Y4vKEFt1L._SX466_.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 10,
+    "name": "OnePlus 6T A6013",
+    "price": "KES 37,999",
+    "image": [
+      "https://techbuyz.co.ke/wp-content/uploads/2020/05/oneplus.jpg",
+      "https://cdn.movertix.com/media/catalog/product/cache/image/1200x/o/n/oneplus-6t-dual-sim-en-negro-mirror-black-de-128gb-y-8gb-ram-a6013.jpg",
+      "https://i.ebayimg.com/images/g/RQUAAOSw5wFb5Vu4/s-l300.jpg"
+    ],
+    "description": []
+  },
+  {
+    "id": 11,
+    "name": "Samsung 860 EVO, 4TB",
+    "price": "KES 87,000",
+    "oldPrice": "KES 99,000",
+    "image": [
+      "https://static3.caseking.de/media/image/thumbnail/ssss-136_ssss_136_01_800x800.jpg",
+      "https://images.samsung.com/is/image/samsung/uk-870-qvo-sata-3-2-5-ssd-mz-77q4t0bw-backblack-thumb-262404361?$480_480_PNG$"
+    ],
+    "description": []
+  }
+]

@@ -1,0 +1,109 @@
+.indexCont {
+  z-index: 10;
+}
+.cartTop {
+  z-index: 11;
+}
+
+::placeholder {
+  font-size: 13px !important;
+}
+
+:-ms-input-placeholder {
+  font-size: 13px !important;
+}
+
+::-ms-input-placeholder {
+  font-size: 13px !important;
+}
+
+.indicators li {
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  float: left !important;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s !important;
+}
+span.star {
+  color: red;
+  padding-left: 0.2rem;
+  vertical-align: middle;
+}
+.label {
+  text-align: center;
+  font-size: small;
+}
+.indicators li.active,
+.indicators li.done,
+.indicators li:hover {
+  opacity: 1 !important;
+}
+.indicators li.active .circle,
+.indicators li.done .circle,
+.indicators li:hover .circle {
+  background: var(--primary);
+  color: var(--light);
+}
+.indicators li .circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  color: var(--dark);
+}
+/* FLIP CARD */
+.checkIndicator {
+  z-index: 1;
+  border-radius: 0%;
+  padding: 0.1rem 0.8rem;
+}
+.card-container {
+  perspective: 700px;
+  min-height: 200px;
+}
+
+.card-flip,
+.card-container {
+  transition: all 0.7s ease;
+}
+
+.card-flip div {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.back {
+  transform: rotateX(180deg);
+}
+.front,
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-container:hover .card-flip {
+  transform: rotateX(-180deg);
+}
+.card-flip {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  grid-template-areas: "frontAndBack";
+  transform-style: preserve-3d;
+  transition: all 0.7s ease;
+}
+
+.front {
+  grid-area: frontAndBack;
+}
+
+.back {
+  grid-area: frontAndBack;
+  transform: rotateX(-180deg);
+}
