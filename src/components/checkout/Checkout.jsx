@@ -5,13 +5,17 @@ import "./Checkout.css";
 import { navbarRef } from "../includes/navbar/Navbar";
 import {
   checkoutNextIndex,
+  checkoutPrevIndex,
   checkoutSetIndex,
 } from "../../redux/actions/checkoutActions";
 
 import {
+  addPaymentMethod,
+  checkoutAddDeliveryInfo,
   checkoutAddDeliveryOption,
   checkoutAddUserInfo,
 } from "../../redux/actions/deliveryInfoActions";
+import { placeOrder } from "../../api/checkout";
 
 class IndexIndicator extends React.Component {
   render() {
@@ -24,11 +28,19 @@ class IndexIndicator extends React.Component {
                 key={item.name}
                 className={
                   "col " +
-                  (this.props.pageIndex === index && "active ") +
+                  (this.props.pageIndex === index && "current ") +
                   (this.props.pageIndex > index && " done")
                 }
               >
-                <span className="circle">{index + 1}</span>
+                {this.props.pageIndex > index ? (
+                  <div className="circle">
+                    <i className="fas fa-check fa-sm"></i>
+                  </div>
+                ) : (
+                  <div className="circle">
+                    <p className="m-0">{index + 1}</p>
+                  </div>
+                )}
                 <span className="label">{item.name}</span>
               </li>
             );
@@ -40,7 +52,20 @@ class IndexIndicator extends React.Component {
 }
 
 class Checkout extends React.Component {
+  placeOr() {
+    const data = placeOrder({
+      shipping: {
+        ...this.props.deliveryInfo,
+      },
+      billing: {
+        ...this.props.deliveryInfo
+      },
+      total_amount: 200,
+      currency: "KES",
+    });
+  }
   componentDidMount() {
+    this.placeOr();
     navbarRef.current.classList.add("collapse");
   }
   componentWillUnmount() {
@@ -52,7 +77,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <>
-        <div className="container-fluid shadow-sm sticky-top bg-light">
+        <div className="container-fluid shadow-sm sticky-top bg-white mb-2">
           <IndexIndicator {...this.props} />
         </div>
         <div className="container-fluid">
@@ -60,7 +85,7 @@ class Checkout extends React.Component {
             <div className="col-sm-12 col-md-8 col-lg-7">
               <this.renderScreen {...this.props} />
             </div>
-            <div className="col-sm-12 col-md-4 col-lg-5">1</div>
+            <div className="col-sm-12 col-md-4 col-lg-5"></div>
           </div>
         </div>
       </>
@@ -78,10 +103,25 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setIndex: (index) => dispatch(checkoutSetIndex(index)),
-    addUserInfo: (firstName, lastName, phone, phone2, email) =>
-      dispatch(checkoutAddUserInfo(firstName, lastName, phone, phone2, email)),
+    prevIndex: () => dispatch(checkoutPrevIndex()),
+    addUserInfo: (first_name, last_name, phone, phone2, email) =>
+      dispatch(
+        checkoutAddUserInfo(first_name, last_name, phone, phone2, email)
+      ),
     nextIndex: () => dispatch(checkoutNextIndex(checkOutPages.length - 1)),
     addDeliveryOption: (option) => dispatch(checkoutAddDeliveryOption(option)),
+    addDeliveryInfo: (address, address2, city, state, postal_code, country) =>
+      dispatch(
+        checkoutAddDeliveryInfo(
+          address,
+          address2,
+          city,
+          state,
+          postal_code,
+          country
+        )
+      ),
+    addPaymentMethod: (method) => dispatch(addPaymentMethod(method)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

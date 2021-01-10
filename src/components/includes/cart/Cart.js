@@ -7,7 +7,7 @@ import {
   reduceQuantity,
   removeFromCart,
 } from "../../../redux/actions/cartActions";
-import { toPrice } from "../../../utils/functions";
+import { formatPrice, toPrice } from "../../../utils/functions";
 import { useHistory } from "react-router-dom";
 import { addToast } from "../../../redux/actions/toastActions";
 
@@ -126,7 +126,7 @@ class CartItem extends React.Component {
                 item={this.props.item}
               />
               <p className="text-right small my-auto w-100">
-                {this.props.item.price}
+                {formatPrice(this.props.item.price)}
               </p>
             </div>
           </div>
@@ -184,11 +184,7 @@ class Total extends React.Component {
     const prices = this.props.cart.map((item, prices) => {
       return toPrice(item.price) * item.quantity + prices;
     });
-    return prices
-      .reduce((a, b) => a + b, 0)
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return formatPrice(prices.reduce((a, b) => a + b, 0).toFixed(2));
   }
   render() {
     return (

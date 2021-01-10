@@ -86,13 +86,13 @@ class CarouselItem extends React.Component {
         {
           title: "ASUS StudioBook ProArt",
           price: "KES 78,000",
-          oldPrice: "KES 102,000",
+          old_price: "KES 102,000",
           image: "https://cdn.mos.cms.futurecdn.net/JMzoTqNZJCXXzVUXbhNA8Z.jpg",
         },
         {
           title: "MacBook Pro",
           price: "KES 78,000",
-          oldPrice: "KES 102,000",
+          old_price: "KES 102,000",
           image:
             "https://cdn.wccftech.com/wp-content/uploads/2018/05/Upcoming-2016-MacBook-Pro-sneak-peak-features-included-and-release-date.jpg",
         },
@@ -120,8 +120,8 @@ class CarouselItem extends React.Component {
                 <p className="title">{item.title}</p>
                 <p className="h5" hidden>
                   {item.price} &nbsp;
-                  {item.oldPrice != null ? (
-                    <strike className="text-muted">{item.oldPrice}</strike>
+                  {item.old_price != null ? (
+                    <strike className="text-muted">{item.old_price}</strike>
                   ) : (
                     ""
                   )}

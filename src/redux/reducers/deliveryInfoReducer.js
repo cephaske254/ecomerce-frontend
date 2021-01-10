@@ -1,21 +1,21 @@
 import * as actions from "../actionTypes";
 
 const defaultState = {
-  firstName: null,
-  lastName: null,
-  phone: null,
-  phone2: null,
-  email: null,
+  first_name: "",
+  last_name: "",
+  phone: "",
+  phone2: "",
+  email: "",
 
-  address: null,
-  address2: null,
+  address: "",
+  address2: "",
 
-  deliveryOption: null,
+  delivery_option: "",
 
-  city: null,
-  state: null,
-  postalCode: null,
-  country: null,
+  city: "",
+  state: "",
+  postal_code: "",
+  country: "",
 };
 
 export default function reducer(state = defaultState, action) {
@@ -29,9 +29,16 @@ export default function reducer(state = defaultState, action) {
     case actions.CHECKOUT_ADD_DELIVERY_OPTION:
       const data = {
         ...state,
-        deliveryOption: action.payload,
+        delivery_option: action.payload,
       };
       return data;
+
+    case actions.CHECKOUT_ADD_PAYMENT_METHOD:
+      const paymentMethod = {
+        ...state,
+        paymentMethod: action.payload.paymentMethod,
+      };
+      return paymentMethod
 
     default:
       return state;

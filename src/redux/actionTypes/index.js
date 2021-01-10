@@ -12,3 +12,8 @@ export const CHECKOUT_SET_INDEX = "checkoutSetIndex";
 export const CHECKOUT_ADD_USER_INFO = "checkoutAdduserInfo";
 export const CHECKOUT_ADD_DELIVERY_OPTION = "checkoutAddDeliveryOption";
 export const CHECKOUT_ADD_DELIVERY_INFO = "checkoutAddDeliveryInfo";
+
+export const CHECKOUT_ADD_PAYMENT_METHOD = "addPaymenMethod";
+
+export const SET_PRODUCTS = "setProducts";
+export const SET_PRODUCT_DETAIL = "setProductDetail";

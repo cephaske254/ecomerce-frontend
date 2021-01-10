@@ -1,14 +1,15 @@
 export const saveState = (state) => {
-  const currentState = { ...state };
-  try {
-    delete currentState["toasts"];
-    localStorage.setItem("state", JSON.stringify(currentState));
-  } catch {}
+  const data = {
+    cart: state.cart,
+    deliveryInfo: state.deliveryInfo,
+    checkoutPageIndex: state.checkoutPageIndex,
+  };
+  sessionStorage.setItem("state", JSON.stringify(data));
 };
 
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("state");
+    const serializedState = sessionStorage.getItem("state");
     if (serializedState === null) {
       return {};
     }

@@ -5,23 +5,30 @@ import "./custom.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import * as $ from "jquery";
-// eslint-disable-next-line
-import bootstrap from "bootstrap";
+import "bootstrap";
 import Toast from "./components/includes/toast";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      // productImageHeight: "150px",
     };
   }
   render() {
     return (
       <>
-        <Toast/>
-        <Navbar />
+        <PayPalScriptProvider
+          options={{
+            "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+            currency: "USD",
+            components: "hosted-fields,buttons",
+          }}
+        >
+          <Toast />
+          <Navbar />
+        </PayPalScriptProvider>
       </>
     );
   }

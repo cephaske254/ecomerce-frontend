@@ -39,21 +39,24 @@ span.star {
   text-align: center;
   font-size: small;
 }
-.indicators li.active,
+.indicators li.current,
 .indicators li.done {
   opacity: 1;
 }
 
-.indicators li.active .circle,
+.indicators li.current .circle,
 .indicators li.done .circle {
   background: var(--primary);
   color: var(--light);
 }
 .indicators li .circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 30px;
   text-align: center;
-  border: 1px solid var(--primary);
+  border: .5px solid var(--primary);
   border-radius: 50%;
   color: var(--dark);
 }

@@ -1,26 +1,10 @@
-import { useParams } from "react-router-dom";
 import React from "react";
-import topProducts from "../home/topProducts.json";
-import { slugify } from "../../utils/functions";
 import "./ProductDetail.css";
-import FourOFour from "../handlers/404";
 import { addToCart } from "../../redux/actions/cartActions";
 import { connect } from "react-redux";
 import { addToast } from "../../redux/actions/toastActions";
-
-function ProductDetailWrapper(props) {
-  const params = useParams();
-  let product = {};
-  try {
-    product = topProducts.filter(
-      (product) => slugify(product.name.toString()) === params.product_slug
-    )[0];
-  } catch {}
-  if (!product) {
-    return <FourOFour />;
-  }
-  return <ProductDetail addToCart={props.addToCart} product={product} />;
-}
+import { getProduct } from "../../api/inventory";
+import { formatPrice } from "../../utils/functions";
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -39,6 +23,12 @@ class ProductDetail extends React.Component {
   }
   componentDidMount() {
     this.setImageHeight();
+
+    const slug = this.props.match.params.product_slug;
+    getProduct(slug).then((data) => {
+      if (data.status === 404) {
+      }
+    });
 
     window.onresize = () => {
       this.setImageHeight();
@@ -70,32 +60,36 @@ class ProductDetail extends React.Component {
                     data-keyboard="true"
                   >
                     <div className="carousel-inner">
-                      {this.props.product.image &&
-                        this.props.product.image.map((image, index) => {
+                      {this.props.product.images &&
+                        this.props.product.images.map((image, index) => {
                           return (
                             <div
-                              key={image}
+                              key={"carousel-img-" + index}
                               className={
                                 "carousel-item" + (index === 0 ? " active" : "")
                               }
                             >
                               <div className="d-flex imageCont">
-                                <img src={image} alt="" className="img-fluid" />
+                                <img
+                                  src={image.image}
+                                  alt=""
+                                  className="img-fluid"
+                                />
                               </div>
                             </div>
                           );
                         })}
                     </div>
                     <ol className="carousel-indicators">
-                      {this.props.product.image &&
-                        this.props.product.image.map((image, index) => {
+                      {this.props.product.images &&
+                        this.props.product.images.map((image, index) => {
                           return (
                             <li
                               key={image}
                               data-target="#carousel"
                               data-slide-to={index}
                               style={{
-                                backgroundImage: `url(${image})`,
+                                backgroundImage: `url(${image.image})`,
                               }}
                               className={
                                 "border " + (index === 0 ? "active" : "")
@@ -136,12 +130,11 @@ class Description extends React.Component {
     return (
       <>
         <h5>Description</h5>
-        {this.props.description.length > 0 ? (
-          <ul className="px-3 small">
-            {this.props.description.map((item) => {
-              return <li key={item}>{item}</li>;
-            })}
-          </ul>
+        {this.props.description ? (
+          <div
+            dangerouslySetInnerHTML={{ __html: this.props.description }}
+            className="text"
+          />
         ) : (
           <p className="text-muted text-center">No Description Provided</p>
         )}
@@ -209,7 +202,7 @@ class AddToCartView extends React.Component {
       this.props.product.id,
       this.props.product.name,
       this.props.product.price,
-      this.props.product.image[0]
+      this.props.product.images[0]
     );
   };
   render() {
@@ -218,10 +211,12 @@ class AddToCartView extends React.Component {
         <div className="mt-2"></div>
         <div className="py-2">
           <div className="d-flex m-0 text-primary">
-            <p className="prc-tag h5">{this.props.product.price}</p>
-            {this.props.product.oldPrice && (
-              <p className="col strike text-muted">
-                {this.props.product.oldPrice}
+            <p className="prc-tag h5">
+              {formatPrice(this.props.product.price)}
+            </p>
+            {this.props.product.old_price && (
+              <p className="col strike pext-muted">
+                {formatPrice(this.props.product.old_price)}
               </p>
             )}
           </div>
@@ -243,7 +238,9 @@ class AddToCartView extends React.Component {
 
 //
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    product: state.inventory.productDetail,
+  };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -253,7 +250,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetailWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

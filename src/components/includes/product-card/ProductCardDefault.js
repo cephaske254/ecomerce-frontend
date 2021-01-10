@@ -2,18 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import errorImage from "../../../error.png";
 import "./productCard.css";
-import { slugify } from "../../../utils/functions";
 import loadingSvg from "../../../assets/loader.svg";
 import { addToCart } from "../../../redux/actions/cartActions";
 import { connect } from "react-redux";
 import { addToast } from "../../../redux/actions/toastActions";
+import { formatPrice } from "../../../utils/functions";
 
 class ProductCardDefault extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       errored: false,
-      image: this.props.product.image[0],
+      image: this.props.product.image,
     };
   }
   onError = () => {
@@ -30,7 +30,7 @@ class ProductCardDefault extends React.Component {
       this.props.product.id,
       this.props.product.name,
       this.props.product.price,
-      this.props.product.image[0]
+      this.props.product.image
     );
   };
 
@@ -44,7 +44,7 @@ class ProductCardDefault extends React.Component {
           <div className="card text-dark text border-0 shadow-sm h-100 text-decoration-none">
             <Link
               className="card-top h-100 text-dark text-decoration-none"
-              to={"/p/" + slugify(this.props.product.name)}
+              to={"/p/" + this.props.product.slug}
             >
               <div className="product-image-cont">
                 <img src={loadingSvg} className="loadingImg" alt="" />
@@ -61,9 +61,11 @@ class ProductCardDefault extends React.Component {
                   {this.props.product.name}
                 </p>
                 <div className="d-flex small">
-                  <div className="col p-0">{this.props.product.price}</div>
+                  <div className="col p-0">
+                    {formatPrice(this.props.product.price)}
+                  </div>
                   <div className="text-right strike text-muted">
-                    {this.props.product.oldPrice}
+                    {this.props.product.old_price}
                   </div>
                 </div>
               </div>
@@ -87,7 +89,7 @@ class ProductCardDefault extends React.Component {
 ProductCardDefault.defaultProps = {
   name: "Product Name",
   price: "KES 0",
-  oldPrice: null,
+  old_price: null,
   image: "",
   productId: null,
 };

@@ -5,16 +5,22 @@ const validateRequired = (val, required = true) => {
   return;
 };
 
-const validateLength = (val, field, min = 1, max = 0, anonymous = false) => {
+export const validateLength = (
+  val,
+  field,
+  min = 1,
+  max = 0,
+  anonymous = false
+) => {
   if (max === 0 && val && val.length < min) {
     return anonymous
       ? `Please enter a valid ${field}`
-      : `Enter atleast ${min} letters`;
+      : `Enter atleast ${min} characters`;
   }
   if (max > 0 && val && val.length >= min) {
     return anonymous
       ? `Please enter a valid ${field}`
-      : `Enter atmost ${min} letters`;
+      : `Enter atmost ${min} characters`;
   }
 };
 
@@ -51,7 +57,7 @@ const validateNames = (val, field) => {
   return data;
 };
 
-const validatePhone = (val, field = "phone", required = true) => {
+export const validatePhone = (val, field = "phone", required = true) => {
   const data = {};
   const errors = [];
 
@@ -73,8 +79,8 @@ const validatePhone = (val, field = "phone", required = true) => {
 
 export const ValidateUserInfo = (state) => {
   const errors = {
-    ...validateNames(state.firstName, "firstName"),
-    ...validateNames(state.lastName, "lastName"),
+    ...validateNames(state.first_name, "first_name"),
+    ...validateNames(state.last_name, "last_name"),
     ...validatePhone(state.phone, "phone"),
     ...validatePhone(state.phone2, "phone2", false),
     ...validateEmail(state.email, true),
@@ -88,12 +94,9 @@ const validateAddress = (val, field = "address") => {
   const errors = [];
 
   const vReq = validateRequired(val, true);
-  const vLen = validateLength(val, "address", 3, 0, true);
+  // const vLen = validateLength(val, "address", 3, 0, true);
   if (vReq) {
     errors.push(vReq);
-  }
-  if (vLen) {
-    errors.push(vLen);
   }
   data[field] = errors;
   return data;
@@ -113,7 +116,7 @@ export const ValidateDeliveryInfo = (state) => {
     ...validateAddress(state.address),
     ...validateCity(state.city, "city"),
     ...validateCity(state.state, "state"),
-    ...validateCity(state.postalCode, "postalCode"),
+    ...validateCity(state.postal_code, "postal_code"),
     ...validateCity(state.country, "country"),
   };
   return { errors: errors };

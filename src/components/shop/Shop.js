@@ -1,9 +1,13 @@
 import React from "react";
 import "./Shop.css";
 import ProductCarddefault from "../includes/product-card/ProductCardDefault";
-import products from "../home/topProducts.json";
+import { connect } from "react-redux";
+import { getProducts } from "../../api/inventory";
 
 class Shop extends React.Component {
+  componentDidMount() {
+    getProducts();
+  }
   render() {
     return (
       <>
@@ -12,9 +16,15 @@ class Shop extends React.Component {
           <div className="row">
             <div className="col container">
               <div className="row">
-                {products.map((product) => {
-                  return <ProductCarddefault key={product.id} product={product} />;
-                })}
+                {this.props.products &&
+                  this.props.products.map((product, index) => {
+                    return (
+                      <ProductCarddefault
+                        key={"prKey-" + index}
+                        product={product}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -24,4 +34,14 @@ class Shop extends React.Component {
   }
 }
 
-export default Shop;
+const mapStateToProps = (state) => {
+  const inventory = state.inventory;
+  return {
+    products: inventory.products.data,
+    next: inventory.products.next,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
