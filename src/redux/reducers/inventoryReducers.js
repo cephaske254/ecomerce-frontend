@@ -11,6 +11,13 @@ const defaultState = {
     count: 0,
     next: null,
   },
+  topProducts: [
+    {
+      data: [],
+      count: 0,
+      next: null,
+    },
+  ],
 };
 export default function reducer(state = { ...defaultState }, action) {
   switch (action.type) {
@@ -19,6 +26,16 @@ export default function reducer(state = { ...defaultState }, action) {
         ...state,
         products: {
           data: [...action.payload.data],
+          count: action.payload.count,
+          next: action.payload.next,
+          previous: action.payload.previous,
+        },
+      };
+    case actions.SET_TOP_PRODUCTS:
+      return {
+        ...state,
+        topProducts: {
+          data: action.payload.data,
           count: action.payload.count,
           next: action.payload.next,
           previous: action.payload.previous,

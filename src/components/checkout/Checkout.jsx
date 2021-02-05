@@ -15,7 +15,7 @@ import {
   checkoutAddDeliveryOption,
   checkoutAddUserInfo,
 } from "../../redux/actions/deliveryInfoActions";
-import { placeOrder } from "../../api/checkout";
+// import { placeOrder } from "../../api/checkout";
 
 class IndexIndicator extends React.Component {
   render() {
@@ -53,16 +53,16 @@ class IndexIndicator extends React.Component {
 
 class Checkout extends React.Component {
   placeOr() {
-    const data = placeOrder({
-      shipping: {
-        ...this.props.deliveryInfo,
-      },
-      billing: {
-        ...this.props.deliveryInfo
-      },
-      total_amount: 200,
-      currency: "KES",
-    });
+    // const data = placeOrder({
+    //   shipping: {
+    //     ...this.props.deliveryInfo,
+    //   },
+    //   billing: {
+    //     ...this.props.deliveryInfo
+    //   },
+    //   total_amount: 200,
+    //   currency: "KES",
+    // });
   }
   componentDidMount() {
     this.placeOr();

@@ -62,11 +62,14 @@ class ProductCardDefault extends React.Component {
                 </p>
                 <div className="d-flex small">
                   <div className="col p-0">
-                    {formatPrice(this.props.product.price)}
+                    KES {formatPrice(this.props.product.price)}
                   </div>
-                  <div className="text-right strike text-muted">
-                    {this.props.product.old_price}
-                  </div>
+                  {this.props.product.price &&
+                    this.props.product.market_price && (
+                      <div className="text-right strike text-muted">
+                        KES {formatPrice(this.props.product.market_price)}
+                      </div>
+                    )}
                 </div>
               </div>
             </Link>

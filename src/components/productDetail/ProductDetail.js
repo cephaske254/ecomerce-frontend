@@ -102,21 +102,22 @@ class ProductDetail extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-5 py-2 px-3">
-              <div className="title">
-                <p className="my-0 d-flex">{this.props.product.name}</p>
-              </div>
+            <div className="col-sm-12 col-md-12 col-lg-5 col-12 py-2 px-3">
+              <p className="my-0 d-flex card-title h4">
+                {this.props.product.name}
+              </p>
+
+              <AddToCartView
+                addToCart={this.props.addToCart}
+                product={this.props.product}
+              />
+              <hr />
 
               <Description description={this.props.product.description} />
 
               {this.props.product.attributes && (
                 <AttributeCont attributes={this.props.product.attributes} />
               )}
-
-              <AddToCartView
-                addToCart={this.props.addToCart}
-                product={this.props.product}
-              />
             </div>
           </div>
         </div>
@@ -129,15 +130,19 @@ class Description extends React.Component {
   render() {
     return (
       <>
-        <h5>Description</h5>
-        {this.props.description ? (
-          <div
-            dangerouslySetInnerHTML={{ __html: this.props.description }}
-            className="text"
-          />
-        ) : (
-          <p className="text-muted text-center">No Description Provided</p>
-        )}
+        <div className="">
+          <h5 className="card-subtitle">Description</h5>
+          <div className="card-body py-0 px-2">
+            {this.props.description ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: this.props.description }}
+                className="text"
+              />
+            ) : (
+              <p className="text-muted text-center">No Description Provided</p>
+            )}
+          </div>
+        </div>
       </>
     );
   }
@@ -202,34 +207,32 @@ class AddToCartView extends React.Component {
       this.props.product.id,
       this.props.product.name,
       this.props.product.price,
-      this.props.product.images[0]
+      this.props.product.images[0].image || null
     );
   };
   render() {
     return (
       <>
-        <div className="mt-2"></div>
-        <div className="py-2">
+        <div className="m-0">
           <div className="d-flex m-0 text-primary">
-            <p className="prc-tag h5">
-              {formatPrice(this.props.product.price)}
+            <p className="prc-tag col h6">
+              KES {formatPrice(this.props.product.price)}
             </p>
-            {this.props.product.old_price && (
-              <p className="col strike pext-muted">
-                {formatPrice(this.props.product.old_price)}
-              </p>
-            )}
+            {this.props.product.discount_price &&
+              this.props.product.market_price && (
+                <p className="col strike text-muted h6">
+                  KES {formatPrice(this.props.product.market_price)}
+                </p>
+              )}
           </div>
-          <div className="btn-group">
-            <button
-              onClick={() => {
-                this.handleAddToCart();
-              }}
-              className="btn btn-sm btn-mono btn-gradient"
-            >
-              ADD TO CART
-            </button>
-          </div>
+          <button
+            onClick={() => {
+              this.handleAddToCart();
+            }}
+            className="btn w-100 mx-2 btn-sm btn-mono btn-gradient"
+          >
+            ADD TO CART
+          </button>
         </div>
       </>
     );

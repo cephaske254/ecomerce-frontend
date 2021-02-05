@@ -28,13 +28,17 @@ function CheckoutButton(props) {
   }
 
   return (
-    <button
-      ref={checkoutBtnRef}
-      onClick={() => handleClick()}
-      className="btn btn-sm btn-outline-primary mx-2"
-    >
-      Checkout
-    </button>
+    <>
+      {props.cart.length == 0 && (
+        <button
+          ref={checkoutBtnRef}
+          onClick={() => handleClick()}
+          className="btn btn-sm mx-2 shadow-sm btn-dark py-0"
+        >
+          CHECKOUT <i className="fa fa-shopping-cart"></i>
+        </button>
+      )}
+    </>
   );
 }
 

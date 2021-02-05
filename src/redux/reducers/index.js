@@ -4,6 +4,7 @@ import toastReducers from "./toastReducers";
 import deliveryInfoReducer from "./deliveryInfoReducer";
 import checkoutPageIndexReducer from "./checkoutReducers";
 import inventoryReducers from "./inventoryReducers";
+import globals from "./globalReducers";
 
 const rootReducers = combineReducers({
   cart: cartReducers,
@@ -11,6 +12,7 @@ const rootReducers = combineReducers({
   deliveryInfo: deliveryInfoReducer,
   checkoutPageIndex: checkoutPageIndexReducer,
   inventory: inventoryReducers,
+  globals,
 });
 
 export default rootReducers;

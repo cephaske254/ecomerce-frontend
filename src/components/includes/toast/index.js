@@ -28,7 +28,7 @@ class Toast extends React.Component {
 class ToastItem extends React.Component {
   componentDidMount() {
     if (this.props.toast.autoHide) {
-      setTimeout(() => this.handleRemove(), 2800);
+      setTimeout(() => this.handleRemove(), 1200);
     }
   }
   handleRemove() {

@@ -16,4 +16,7 @@ export const CHECKOUT_ADD_DELIVERY_INFO = "checkoutAddDeliveryInfo";
 export const CHECKOUT_ADD_PAYMENT_METHOD = "addPaymenMethod";
 
 export const SET_PRODUCTS = "setProducts";
+export const SET_TOP_PRODUCTS = "setTopProducts";
 export const SET_PRODUCT_DETAIL = "setProductDetail";
+
+export const SET_BANNERS = "setBanners";

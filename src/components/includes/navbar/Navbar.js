@@ -119,23 +119,23 @@ class Navbar extends React.Component {
 
     window.onload = () => {
       window.onscroll = () => {
-        let currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-          navbarRef.style.top = "0";
-        } else {
-          if (currentScrollPos > outerHeight / 2) {
-            navbarRef.style.top = `-${navbarRef.offsetHeight}px`;
-          }
-        }
-        prevScrollpos = currentScrollPos;
-
-        let winScroll =
-          document.body.scrollTop || document.documentElement.scrollTop;
-        let height =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
         try {
+          let currentScrollPos = window.pageYOffset;
+          if (prevScrollpos > currentScrollPos) {
+            navbarRef.style.top = "0";
+          } else {
+            if (currentScrollPos > outerHeight / 2) {
+              navbarRef.style.top = `-${navbarRef.offsetHeight}px`;
+            }
+          }
+          prevScrollpos = currentScrollPos;
+
+          let winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+          let height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          let scrolled = (winScroll / height) * 100;
           document.getElementById("scrollBar").style.width = scrolled + "%";
         } catch {}
       };

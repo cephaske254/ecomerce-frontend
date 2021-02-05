@@ -17,14 +17,14 @@
   z-index: 1 !important;
   transition: 0.4s;
   width: 100%;
-  background-color: #0000004b;
+  background-color: rgba(0, 0, 0, 0.552);
   text-align: start !important;
   padding-left: 3em;
   left: 0% !important;
   bottom: 16% !important;
 }
 .carousel-caption:hover {
-  background-color: #000000b3;
+  background-color: rgba(0, 0, 0, 0.774);
 }
 .carousel-caption .shop-now {
   padding: 8px 16px;
@@ -41,7 +41,7 @@
 }
 
 .carousel-caption .title {
-    font-weight: 300;
+  font-weight: 300;
   line-height: 2.8rem;
   font-size: 2.8rem;
 }
@@ -53,4 +53,19 @@
   padding: 10px 16px !important;
   border-radius: 40rem !important;
   letter-spacing: 4px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  background: rgba(0, 0, 0, 0.863);
+  border-radius: 50%;
+}
+.strike {
+  font-weight: 400;
+  opacity: 0.98;
+}
+
+/* EXTRA */
+.prices p {
+  font-size: 1.1rem !important;
 }
