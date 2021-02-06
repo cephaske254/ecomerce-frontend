@@ -174,7 +174,6 @@ export const PayPalButtonSwitch = (props) => {
     return items;
   }
   function onApprove(data, actions) {
-    console.log(data);
     return actions.order.capture().then(function (details) {
       console.log("Transaction completed by " + details.payer.name.given_name);
     });

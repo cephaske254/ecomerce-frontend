@@ -2,7 +2,7 @@ import * as actions from "../actionTypes";
 
 const defaultState = { banners: [], topProducts: [] };
 
-export default function (state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case actions.SET_BANNERS:
       return { ...state, banners: [...action.payload] };
