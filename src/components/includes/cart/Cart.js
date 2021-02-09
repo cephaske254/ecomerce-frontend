@@ -29,7 +29,7 @@ function CheckoutButton(props) {
 
   return (
     <>
-      {props.cart.length == 0 && (
+      {props.cart.length === 0 && (
         <button
           ref={checkoutBtnRef}
           onClick={() => handleClick()}

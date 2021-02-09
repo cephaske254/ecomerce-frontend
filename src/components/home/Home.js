@@ -7,6 +7,7 @@ import { navbarRef } from "../includes/navbar/Navbar";
 import { connect } from "react-redux";
 import { addBannerAds } from "../../redux/actions/globalActions";
 import { getBanners, getTopProducts } from "../../api/globals";
+import LoadingSm from "../includes/loading/loadingSm";
 
 class Home extends React.Component {
   render() {
@@ -22,11 +23,18 @@ class Home extends React.Component {
   componentDidMount() {}
 }
 class Carousel extends React.Component {
+  state = { loading: false };
+
   render() {
     document.title = `${process.env.REACT_APP_TITLE} | Home`;
     return (
       <>
-        {this.props.banners.length > 0 ? (
+        {this.state.loading ? (
+          <LoadingSm
+            float={false}
+            classes={["bg-dark border-bottom border-secondary shadow-sm"]}
+          />
+        ) : (
           <div
             className="carousel bg-dark slide carousel-fade"
             id="carousel"
@@ -62,13 +70,6 @@ class Carousel extends React.Component {
               <span className="sr-only">Next</span>
             </a>
           </div>
-        ) : (
-          <div
-            className="d-flex bg-dark justify-content-center 
-          p-2"
-          >
-            <div className="spinner-grow" />
-          </div>
         )}
       </>
     );
@@ -81,7 +82,10 @@ class Carousel extends React.Component {
       navbar.classList.add("fixed-top");
     } catch {}
 
-    if (!this.props.banners.length) getBanners();
+    if (!this.props.banners.length) {
+      this.setState({ loading: true });
+      getBanners().finally(() => this.setState({ loading: false }));
+    }
   }
 
   componentWillUnmount() {
@@ -104,23 +108,26 @@ class CarouselItems extends React.Component {
               className={"carousel-item " + (key === 0 ? "active" : "")}
               style={{ backgroundImage: `url(${item.image})` }}
             >
-              <div class="carousel-caption">
-                <p class="title">{item.title}</p>
-                <div class="px-2 prices">
+              <div className="carousel-caption">
+                <p className="title">{item.title}</p>
+                <div className="px-2 prices">
                   {item.product && item.product.price && item.show_prices && (
-                    <div class="d-flex" v-if="">
-                      <p class="h5">{"KES " + item.product.price}</p>
+                    <div className="d-flex" v-if="">
+                      <p className="h5">{"KES " + item.product.price}</p>
                       {item.product && item.product.market_price && (
-                        <p class="h5 ml-2">
-                          <span class="mx-3 my-0 text-center">|</span>
-                          <span class="strike text-light">
+                        <p className="h5 ml-2">
+                          <span className="mx-3 my-0 text-center">|</span>
+                          <span className="strike text-light">
                             {"KES " + item.product.market_price}
                           </span>
                         </p>
                       )}
                     </div>
                   )}{" "}
-                  <Link to={`/p/${item.product.slug}/`} class="btn shop-now">
+                  <Link
+                    to={`/p/${item.product.slug}/`}
+                    className="btn shop-now"
+                  >
                     SHOP NOW
                   </Link>
                 </div>

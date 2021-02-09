@@ -5,15 +5,13 @@ import { connect } from "react-redux";
 import { addToast } from "../../redux/actions/toastActions";
 import { getProduct } from "../../api/inventory";
 import { formatPrice } from "../../utils/functions";
+import LoadingSm from "../includes/loading/loadingSm";
 
 class ProductDetail extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      imageHeight: "auto",
-    };
-  }
+  state = {
+    loading: true,
+    imageHeight: "auto",
+  };
 
   setImageHeight() {
     let images = document.querySelectorAll(".imagesScroll .imageCont");
@@ -23,12 +21,9 @@ class ProductDetail extends React.Component {
   }
   componentDidMount() {
     this.setImageHeight();
-
     const slug = this.props.match.params.product_slug;
-    getProduct(slug).then((data) => {
-      if (data.status === 404) {
-      }
-    });
+
+    getProduct(slug).finally(() => this.setState({ loading: false }));
 
     window.onresize = () => {
       this.setImageHeight();
@@ -47,80 +42,86 @@ class ProductDetail extends React.Component {
       `,
           }}
         ></style>
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-7 py-2 imagesScroll">
-              <div className="fluid">
-                <div className="card border-0 shadow-sm">
-                  <div
-                    className="carousel slide w-100"
-                    id="carousel"
-                    data-ride="carousel"
-                    data-wrap="true"
-                    data-keyboard="true"
-                  >
-                    <div className="carousel-inner">
-                      {this.props.product.images &&
-                        this.props.product.images.map((image, index) => {
-                          return (
-                            <div
-                              key={"carousel-img-" + index}
-                              className={
-                                "carousel-item" + (index === 0 ? " active" : "")
-                              }
-                            >
-                              <div className="d-flex imageCont">
-                                <img
-                                  src={image.image}
-                                  alt=""
-                                  className="img-fluid"
-                                />
+        {this.state.loading &&
+        this.props.match.params.slug !== this.props.product.slug ? (
+          <LoadingSm />
+        ) : (
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-12 col-md-12 col-lg-7 py-2 imagesScroll">
+                <div className="fluid">
+                  <div className="card border-0 shadow-sm">
+                    <div
+                      className="carousel slide w-100"
+                      id="carousel"
+                      data-ride="carousel"
+                      data-wrap="true"
+                      data-keyboard="true"
+                    >
+                      <div className="carousel-inner">
+                        {this.props.product.images &&
+                          this.props.product.images.map((image, index) => {
+                            return (
+                              <div
+                                key={"carousel-img-" + index}
+                                className={
+                                  "carousel-item" +
+                                  (index === 0 ? " active" : "")
+                                }
+                              >
+                                <div className="d-flex imageCont">
+                                  <img
+                                    src={image.image}
+                                    alt=""
+                                    className="img-fluid"
+                                  />
+                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                      </div>
+                      <ol className="carousel-indicators">
+                        {this.props.product.images &&
+                          this.props.product.images.map((image, index) => {
+                            return (
+                              <li
+                                key={image}
+                                data-target="#carousel"
+                                data-slide-to={index}
+                                style={{
+                                  backgroundImage: `url(${image.image})`,
+                                }}
+                                className={
+                                  "border " + (index === 0 ? "active" : "")
+                                }
+                              ></li>
+                            );
+                          })}
+                      </ol>
                     </div>
-                    <ol className="carousel-indicators">
-                      {this.props.product.images &&
-                        this.props.product.images.map((image, index) => {
-                          return (
-                            <li
-                              key={image}
-                              data-target="#carousel"
-                              data-slide-to={index}
-                              style={{
-                                backgroundImage: `url(${image.image})`,
-                              }}
-                              className={
-                                "border " + (index === 0 ? "active" : "")
-                              }
-                            ></li>
-                          );
-                        })}
-                    </ol>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-5 col-12 py-2 px-3">
-              <p className="my-0 d-flex card-title h4">
-                {this.props.product.name}
-              </p>
+              <div className="col-sm-12 col-md-12 col-lg-5 col-12 py-2 px-3">
+                <p className="my-0 d-flex card-title h4">
+                  {this.props.product.name}
+                </p>
 
-              <AddToCartView
-                addToCart={this.props.addToCart}
-                product={this.props.product}
-              />
-              <hr />
+                <AddToCartView
+                  addToCart={this.props.addToCart}
+                  product={this.props.product}
+                />
+                <hr />
 
-              <Description description={this.props.product.description} />
+                <Description description={this.props.product.description} />
 
-              {this.props.product.attributes && (
-                <AttributeCont attributes={this.props.product.attributes} />
-              )}
+                {this.props.product.attributes && (
+                  <AttributeCont attributes={this.props.product.attributes} />
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </>
     );
   }
