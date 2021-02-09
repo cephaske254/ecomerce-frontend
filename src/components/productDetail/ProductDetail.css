@@ -11,9 +11,8 @@
   align-items: center;
   justify-content: center;
 }
-.imagesScroll .img-fluid {
-  max-width: 90% !important;
-  max-height: 90% !important;
+.imagesScroll img {
+  width: 90%;
 }
 .title {
   font-size: 1.8em;

@@ -9,7 +9,7 @@ import LoadingSm from "../includes/loading/loadingSm";
 
 class ProductDetail extends React.Component {
   state = {
-    loading: true,
+    loading: false,
     imageHeight: "auto",
   };
 
@@ -23,11 +23,15 @@ class ProductDetail extends React.Component {
     this.setImageHeight();
     const slug = this.props.match.params.product_slug;
 
-    getProduct(slug).finally(() => this.setState({ loading: false }));
-
     window.onresize = () => {
       this.setImageHeight();
     };
+
+    if (this.props.product && this.props.product.slug === slug) return;
+    console.log(this.props.product.slug);
+
+    this.setState({ loading: true });
+    getProduct(slug).finally(() => this.setState({ loading: false }));
   }
 
   render() {
@@ -73,7 +77,7 @@ class ProductDetail extends React.Component {
                                   <img
                                     src={image.image}
                                     alt=""
-                                    className="img-fluid"
+                                    className=""
                                   />
                                 </div>
                               </div>

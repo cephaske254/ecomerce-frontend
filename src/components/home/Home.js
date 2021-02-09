@@ -159,6 +159,7 @@ class JumboTron extends React.Component {
 
 class TopProducts extends React.Component {
   componentDidMount() {
+    if (this.props.topProducts.length) return;
     getTopProducts();
   }
   render() {
